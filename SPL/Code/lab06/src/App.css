@@ -1,0 +1,44 @@
+body #calc {
+  width: max(400px, 30vw);
+  height: max(550px, 80vh);
+  border: blue 3px solid;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+body #calc #screen {
+  height: 80px;
+  width: 90%;
+  background-color: grey;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+body #calc #screen #expression, body #calc #screen #resut {
+  height: 40%;
+  width: 90%;
+  text-align: right;
+  text-justify: center;
+}
+body #calc #buttons {
+  display: flex;
+  width: 90%;
+  padding: 0 20px;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: flex-end;
+  align-items: center;
+}
+body #calc #buttons #number {
+  width: 22%;
+  aspect-ratio: 1;
+}
+body #calc #buttons #back {
+  width: 50%;
+  aspect-ratio: 2;
+}
+body #calc #history {
+  border: black 2px solid;
+}/*# sourceMappingURL=App.css.map */

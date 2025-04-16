@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+body form {
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+body form h2 {
+  width: inherit;
+}
+body form label {
+  width: 30%;
+}
+body form label.errorMessage {
+  color: red;
+}
+body form label#telError, body form label#emailError, body form label#surnameError, body form label#nameError, body form label#aboutError {
+  width: 100%;
+  height: 30px;
+}
+body form label:has(input) {
+  width: 12%;
+}
+body form #checkbox {
+  display: inline-block;
+  width: 60%;
+}
+body form input {
+  width: 40%;
+  height: 20px;
+}
+body form input[type=checkbox] {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+body form textarea {
+  width: 60%;
+}
+body form select {
+  width: 41%;
+  height: 26px;
+  padding: 1px 2px;
+}/*# sourceMappingURL=styles.css.map */

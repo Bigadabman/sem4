@@ -1,0 +1,54 @@
+body
+    
+    margin: 0
+    display: flex
+    justify-content: center
+    
+
+    form
+       
+        width: 60vw
+        display: flex
+
+        flex-direction: row
+        flex-wrap: wrap
+        align-content: space-around
+        align-items: flex-start
+        justify-content: flex-start
+
+        h2
+            width: inherit
+
+        label 
+            width: 30%
+
+            &.errorMessage
+                color: red
+
+            &#telError, &#emailError, &#surnameError, &#nameError, &#aboutError
+                width: 100%
+                height: 30px
+
+            &:has(input)
+                width: 12%
+
+        #checkbox
+            display: inline-block
+            width: 60%
+        input
+            width: 40%
+            height: 20px
+            
+            &[type = 'checkbox']
+                width: fit-content
+
+        
+        textarea
+            width: 60%
+        
+        select
+            width: 41%
+            height: 26px
+            padding: 1px 2px
+
+        

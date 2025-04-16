@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+<form  id = 'form'>
+
+    <h2>Заполните форму</h2>
+
+    <label for="surname">Фамилия</label>
+        <input type="text" name="surname" id="surname">
+        <label  class = 'errorMessage' id = 'surnameError'></label>
+    
+    
+    <label for="name">Имя</label>
+        <input type="text" name="name" id="name">
+        <label class = 'errorMessage' id = 'nameError'></label>
+
+    <label for="email">E-Mail</label>
+
+        <input type="email" name="email" id="email">
+        <label  class = 'errorMessage' id = 'emailError'></label>
+
+
+
+    <label for="tel">Телефон</label>
+        <input type="tel" id = 'tel'>
+        <label  class = 'errorMessage' id = 'telError'></label>
+
+
+    <label for="city">Город</label>
+    <select name="city" id="city">
+        <option value="Минск">Минск</option>
+        <option value="Брест">Брест</option>
+        <option value="Могилёв">Могилёв</option>
+        <option value="Гродно">Гродно</option>
+        <option value="Витебск">Витебск</option>
+        <option value="гомель">Гомель</option>
+    </select>
+
+
+
+    <label for="bstuStudy">Я учусь в БГТУ</label>
+    <div id = 'checkbox'>
+         <input type="checkbox" name="bstuStudy" id="bstuStudy">
+    </div>
+
+    <label for="course">На каком курсе вы учитесь</label>
+    <label for="course1"><input type="radio" name="course" id="course1" value = '1'> 1</label>
+    <label for="course2"><input type="radio" name="course" id="course2" value = '1'> 2</label>
+    <label for="course3"><input type="radio" name="course" id="course3" value = '1'> 3</label>
+    <label for="course4"><input type="radio" name="course" id="course4" value = '1'> 4</label>
+
+
+    <label for="about">Расскажите о себе</label>
+
+        <textarea name="about" id="about" rows="4"></textarea>
+        <label  class = 'errorMessage' id = 'aboutError'></label>
+    
+    
+
+    <button type="submit" id = 'submition'>Проверить</button>
+
+</form>
+
+    
+</body>
+
+<script src = 'scripts.js'></script>
+
+</html>

@@ -1,0 +1,78 @@
+USE UNIVER;
+GO
+
+
+declare badStudents cursor dynamic scroll for
+SELECT STUDENT.IDSTUDENT, STUDENT.NAME, STUDENT.BDAY, PROGRESS.NOTE, PROGRESS.SUBJECT
+FROM PROGRESS 
+INNER JOIN STUDENT ON PROGRESS.IDSTUDENT = STUDENT.IDSTUDENT
+WHERE PROGRESS.NOTE < 4
+FOR UPDATE; 
+
+DECLARE 
+    @badStudentId INT,
+    @name NVARCHAR(50),
+    @bday DATE,
+    @note INT,
+    @subject NVARCHAR(50);
+
+OPEN badStudents;
+
+FETCH NEXT FROM badStudents INTO @badStudentId, @name, @bday, @note, @subject;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    DELETE FROM PROGRESS WHERE CURRENT OF badStudents;
+    DELETE FROM STUDENT WHERE CURRENT OF badStudents;
+    FETCH NEXT FROM badStudents INTO @badStudentId, @name, @bday, @note, @subject;
+END
+
+
+declare raiseMark cursor scroll dynamic for
+select STUDENT.IDSTUDENT, STUDENT.NAME, STUDENT.BDAY, PROGRESS.NOTE, PROGRESS.SUBJECT
+FROM PROGRESS 
+INNER JOIN STUDENT ON PROGRESS.IDSTUDENT = STUDENT.IDSTUDENT
+for update;
+
+
+open raiseMark 
+
+
+FETCH FIRST FROM raiseMark INTO @badStudentId, @name, @bday, @note, @subject;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    UPDATE PROGRESS SET NOTE = NOTE + 1 WHERE CURRENT OF raiseMark;
+    FETCH NEXT FROM raiseMark INTO @badStudentId, @name, @bday, @note, @subject;
+END
+
+
+select STUDENT.IDSTUDENT, 
+    STUDENT.NAME, 
+    STUDENT.BDAY, 
+    PROGRESS.NOTE, 
+    PROGRESS.SUBJECT
+FROM PROGRESS 
+INNER JOIN STUDENT ON PROGRESS.IDSTUDENT = STUDENT.IDSTUDENT
+
+FETCH FIRST FROM raiseMark INTO @badStudentId, @name, @bday, @note, @subject;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    UPDATE PROGRESS SET NOTE = NOTE - 1 WHERE CURRENT OF raiseMark;
+    FETCH NEXT FROM raiseMark INTO @badStudentId, @name, @bday, @note, @subject;
+END
+
+
+select STUDENT.IDSTUDENT, 
+    STUDENT.NAME, 
+    STUDENT.BDAY, 
+    PROGRESS.NOTE, 
+    PROGRESS.SUBJECT
+FROM PROGRESS 
+INNER JOIN STUDENT ON PROGRESS.IDSTUDENT = STUDENT.IDSTUDENT
+
+
+close raiseMark
+deallocate raiseMark
+
+CLOSE badStudents;
+DEALLOCATE badStudents;
+GO

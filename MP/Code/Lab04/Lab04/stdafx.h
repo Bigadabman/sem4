@@ -1,0 +1,9 @@
+#pragma once
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+#include <algorithm>
+#include "Levenshtein.h"
+#include <iostream>
+#include <tchar.h>
