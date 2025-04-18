@@ -1,44 +1,127 @@
-body #calc {
-  width: max(400px, 30vw);
-  height: max(550px, 80vh);
-  border: blue 3px solid;
+body .calc {
+  width: min(320px, 80vw);
+  height: min(540px, 100vh);
+}
+
+@media (max-width: 520px) {
+  body .calc {
+    width: 100%;
+    height: 100%;
+  }
+}
+body #dark {
+  background-color: rgb(41, 41, 41);
+  color: white;
+}
+body #dark #screen {
+  background-color: rgb(41, 41, 41);
+}
+body #dark #historyBlock {
+  background-color: rgb(29, 29, 29);
+}
+body #dark button {
+  color: white;
+  background-color: rgb(80, 79, 79);
+}
+body #dark #history {
+  background-color: rgb(41, 41, 41);
+  color: white;
+}
+body #light {
+  background-color: rgb(212, 212, 212);
+}
+body #light button {
+  background-color: rgb(184, 182, 182);
+}
+body #light #history {
+  background-color: rgb(212, 212, 212);
+}
+body #light #historyBlock {
+  background-color: rgb(150, 150, 150);
+}
+body .calc {
+  color: black;
+  box-sizing: border-box;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+  padding: 5px;
+  justify-content: flex-end;
 }
-body #calc #screen {
+body .calc #historyBlock {
+  display: none;
+  background-color: rgb(29, 29, 29);
+  box-sizing: border-box;
+  width: 100%;
+  height: 40%;
+  z-index: 10;
+  padding: 5px;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+body .calc button {
+  border: 0;
+  border-radius: 5%;
+  position: relative;
+  z-index: 1;
+}
+body .calc #history {
+  width: 10%;
+  aspect-ratio: 1;
+  font-size: x-large;
+}
+body .calc #screen {
+  padding-top: 10px;
   height: 80px;
-  width: 90%;
-  background-color: grey;
+  width: 100%;
   margin: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
-body #calc #screen #expression, body #calc #screen #resut {
+body .calc #screen #expression, body .calc #screen #resut {
   height: 40%;
   width: 90%;
   text-align: right;
   text-justify: center;
 }
-body #calc #buttons {
+body .calc #screen #result {
+  font-size: xx-large;
+  text-align: right;
+}
+body .calc #buttons {
   display: flex;
-  width: 90%;
-  padding: 0 20px;
+  width: 100%;
+  position: relative;
   flex-grow: 1;
   flex-wrap: wrap;
   align-content: space-around;
   justify-content: flex-end;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
-body #calc #buttons #number {
-  width: 22%;
+body .calc #buttons #number, body .calc #buttons #equal {
+  width: 23%;
   aspect-ratio: 1;
+  margin: 3px;
+  font-size: large;
 }
-body #calc #buttons #back {
-  width: 50%;
-  aspect-ratio: 2;
+body .calc #buttons #back {
+  width: 48%;
+  aspect-ratio: 2.1;
+  margin: 3px;
+  font-size: large;
 }
-body #calc #history {
-  border: black 2px solid;
+body .calc #buttons #equal {
+  background-color: rgb(0, 138, 218);
+}
+
+@media (min-width: 520px) {
+  .calc {
+    width: 100%;
+    height: 100%;
+  }
 }/*# sourceMappingURL=App.css.map */

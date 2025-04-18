@@ -1,74 +1,73 @@
 import { ReactNode } from 'react';
-import { MyButton } from './button';
+import React, { useState, useEffect } from 'react';
+import { MyButton, calculating, historyToggle, clear, backspace } from './button';
 import { Screen } from './screen';
+import { HistoryBlock } from './history';
 
-function clear(){
-    let screen: HTMLElement|null = document?.getElementById('expression');
-    let resulting: HTMLElement|null = document?.getElementById('result');
-    if(screen != null && screen.textContent!=null && resulting != null && resulting.textContent != null){
-    
-    screen.textContent = '';
-    resulting.textContent = '';
-    }
-    else
-        throw new DOMException('no screen')
-    
-}
 
-function backspace(){
-    let screen: HTMLElement|null = document?.getElementById('expression');
 
-    if(screen != null && screen.textContent != null)
-        screen.textContent = screen.textContent.slice(0, -1);
 
-    else{
-        throw new DOMException('no screen')
-    }
 
-}
-//FIXME операции со строками
-function calculating(){
-    let screen: HTMLElement|null = document?.getElementById('expression');
-    let resulting: HTMLElement|null = document?.getElementById('result');
-    let history: HTMLElement|null = document?.getElementById('history');
-    if(screen != null && screen.textContent!=null && resulting != null && resulting.textContent != null
-        && history != null && history.textContent != null
-    ){
-       try
-       {
-        let result: string = eval(screen.textContent)
-        result = (+result).toFixed(5)
-        if(!isFinite(+result)){
-            throw new DOMException('cant devide by zero');
-        }
-        else {
-            history.textContent = (screen.textContent) + '\n' + history.textContent;
-            resulting.textContent = result;
-
-        }
-
-    }
-    //TODO доделать
-    catch (error: any){
-        
-        resulting.textContent = error.message;
-        
-    }
-
-    }
-}
 
 
 export function Calculator(){
+
+    let [theme, setState] = useState<string>('dark')
+    function themeToggle(){
+        setState( prev => (prev == 'dark') ? 'light' : 'dark');
+        console.log('ld')
+    }
+
+    let printing: string[] = ['.', '/', '*', '-', '+'];
+
+
+
+    useEffect(() => {
+        const handleKeyPress = (e: KeyboardEvent) => {
+           e.preventDefault();
+
+        let screen: HTMLElement|null = document?.getElementById('expression');
+        if(screen == null || screen.textContent == null)
+            throw new DOMException('no screen')
+        
+        else{
+
+            if(printing.includes(e.key) || (e.key >='0' && e.key <='9'))
+                screen.textContent += e.key;
+
+            else if( e.key == 'Backspace')
+                backspace();
+
+            else if( e.key == 'Escape')
+                clear();
+            else if(e.key == 'Enter' || e.key == '=')
+                calculating();
+        }
+        };
+        
+        document.addEventListener('keydown', handleKeyPress);
+        return () => document.removeEventListener('keydown', handleKeyPress);
+      }, []);
+
+    
 
     return (
 
 
         <div
-        id = {'calc'}
+        className = {'calc' }
+        id = {theme}
         >
+            
+            <MyButton id = 'themeToggle'  callback={themeToggle} title = {'тема'}></MyButton>
+            
+            <MyButton id = 'history' callback= {historyToggle} title= {'↺'}/>
             <Screen />
+            
+            
             <div id = {'buttons'}>
+                <HistoryBlock />
+
 
                 <MyButton id = 'number' callback={clear} title = 'C'/>
                 <MyButton id = 'back' callback={backspace} title = '←'/>
@@ -91,11 +90,11 @@ export function Calculator(){
 
                 <MyButton id = 'number'  title = '0'/>
                 <MyButton id = 'number'  title = '.'/>
-                <MyButton id = 'number' callback={calculating} title = '='/>
+                <MyButton id = 'equal' callback={calculating} title = '='/>
 
+                
             </div> 
-
-            <div id = {'history'}></div>
+            
         </div>
         
     );
