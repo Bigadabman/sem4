@@ -1,6 +1,6 @@
 use UNIVER
 
-
+go 
 
 declare @subjects char(100) = '',
 		@subject char(10);
@@ -20,7 +20,7 @@ fetch cursorSubject into @subject;
 while @@FETCH_STATUS = 0
 	begin 
 		set @subjects = rtrim(@subject) + ', ' + @subjects; 
-		--set @subjects = @subjects + ', ' + ltrim(@subject);
+
 		fetch cursorSubject into @subject;
 
 	end;

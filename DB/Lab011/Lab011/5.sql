@@ -7,8 +7,8 @@ select * from Товары for update
 open cursorMyBase
 
 
-declare @name char(10),
-		@description char(30);
+declare @name varchar(10),
+		@description varchar(30);
 
 
 		insert into Товары 
