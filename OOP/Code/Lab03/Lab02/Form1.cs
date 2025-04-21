@@ -13,11 +13,16 @@ using System.Windows.Forms;
 using static Lab02.Processor;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace Lab02
 {
     public partial class CompCreate : Form
     {
+
+
         BindingList<Computer> computers = new BindingList<Computer>();
         private BindingList<Processors> _processors = new BindingList<Processors>();
         private BindingList<VideoCard> graphicsCard = new BindingList<VideoCard>();
@@ -26,6 +31,7 @@ namespace Lab02
             InitializeComponent();
             LoadProcessorsFromJson();
             LoadGraphicsCardFromJson();
+            lastAction.Text = "none";
             if (File.Exists("computers.json"))
             {
                 string json = File.ReadAllText("computers.json");
@@ -122,6 +128,8 @@ namespace Lab02
 
         private void процессорыToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            lastAction.Text = "Процессор";
             Processor form2 = new Processor();
 
             form2.ShowDialog();
@@ -129,6 +137,7 @@ namespace Lab02
 
         private void видеокартыToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            lastAction.Text = "Видеокарта";
             GraphicsCard form2 = new GraphicsCard();
 
             form2.ShowDialog();
@@ -142,65 +151,42 @@ namespace Lab02
 
 
 
-        private void SaveComputerToJson(Computer computer)
+        private void SaveComputerToJson(Computer computer, string path)
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
             List<Computer> computers = new List<Computer>();
 
             // Если файл существует, загружаем существующие данные
-            if (File.Exists("computers.json"))
+            if (File.Exists(path))
             {
-                string json = File.ReadAllText("computers.json");
+                string json = File.ReadAllText(path);
                 computers = JsonSerializer.Deserialize<List<Computer>>(json) ?? new List<Computer>();
             }
+            File.Copy("computers.json", "prevComputers.json");
 
             // Добавляем новый процессор
             computers.Add(computer);
 
             // Сохраняем обновленный список
             string newJson = JsonSerializer.Serialize(computers, options);
-            File.WriteAllText("computers.json", newJson);
+            File.WriteAllText(path, newJson);
         }
 
 
-
-
-        private bool validateInputs(ComboBox PCType, NumericUpDown RAMSize,
-            ComboBox memoryType, TrackBar memorySize, DateTimePicker BuyDate)
+        private bool ValidateComputer(Computer computer)
         {
-            if (string.IsNullOrWhiteSpace(PCType.Text))
+            var context = new ValidationContext(computer);
+            var errors = new List<ValidationResult>();
+
+            if (!Validator.TryValidateObject(computer, context, errors, true))
             {
-                MessageBox.Show("Введите тип компьютера!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                foreach (var error in errors)
+                {
+                    MessageBox.Show(error.ErrorMessage);
+                }
                 return false;
             }
-
-            if (!int.TryParse(RAMSize.Text, out int size) || size <= 0 || size > 128)
-            {
-                MessageBox.Show("Введите корректное количество ОЗУ (1-128)!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(memoryType.Text))
-            {
-                MessageBox.Show("Введите тип памяти!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (memorySize.Value < 120 || memorySize.Value > 2048)
-            {
-                MessageBox.Show("Введите корректный объем памяти (120 - 2048 Gb)!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (buyDate.Value > DateTime.Now || buyDate.Value < new DateTime(2005, 1, 1)) {
-                MessageBox.Show("Введите корректную дату приобретения!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-
-            }
-
-
             return true;
-
         }
 
         private decimal CalculatePrice()
@@ -243,29 +229,28 @@ namespace Lab02
 
         private void button1_Click(object sender, EventArgs e)
         {
+            lastAction.Text = "Сохранение";
 
-            
+            Computer Comp = new Computer
+                            {
+                                computerType = PCType.Text,
+                                RAMSize = (int)(RAMSize.Value),
+                                memorySize = memorySize.Value,
+                                memoryType = memoryType.Text,
+                                buyDate = buyDate.Value,
+                                processor = comboBoxProcessor.Text,
+                                card = comboBoxGraphicsCard.Text,
+                            };
 
-
-           if( validateInputs(PCType, RAMSize, memoryType, memorySize, buyDate))
+           if( ValidateComputer(Comp))
             {
                 CalculatePrice();
+                Comp.price = int.Parse(ComputerPrice.Text);
 
-                Computer Comp = new Computer
-                {
-                    computerType = PCType.Text,
-                    RAMSize = (int)(RAMSize.Value),
-                    memorySize = memorySize.Value,
-                    memoryType = memoryType.Text,
-                    buyDate = buyDate.Value,
-                    price = int.Parse(ComputerPrice.Text),
-                    processor = comboBoxProcessor.Text,
-                    card = comboBoxGraphicsCard.Text,
-                };
 
                 try
                 {
-                    SaveComputerToJson(Comp);
+                    SaveComputerToJson(Comp, "computers.json");
                     MessageBox.Show("Данные успешно сохранены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
@@ -285,10 +270,24 @@ namespace Lab02
         {
             public string processor {  get; set; }
             public string card { get; set; }
+
+
+            [Required(ErrorMessage = "Модель обязательна")]
+            [RegularExpression(@"^(Server|PC|Laptop)$", ErrorMessage = "Допустимые значения: Server, PC, Laptop")]
             public string computerType {  get; set; }
+
+
+            [Range(1, 128, ErrorMessage = "ОЗУ должно быть от 1 до 128 ГБ")]
+
             public int RAMSize { get; set; }
+
+            [Range (120, 2048, ErrorMessage ="Память должна быть от 120 до 2048 ГБ")]
             public int memorySize { get; set; }
+
             public DateTime buyDate { get; set; }
+
+
+            [RegularExpression(@"^(SSD|HDD)$", ErrorMessage = "Допустимые значения: SSD, HDD")]
             public string memoryType { get; set; }
 
             public decimal price { get; set; }
@@ -303,6 +302,11 @@ namespace Lab02
 
         }
 
+
+
+        
+
+
         private void label9_Click(object sender, EventArgs e)
         {
 
@@ -310,15 +314,12 @@ namespace Lab02
 
 
 
-
-
-
         private void button2_Click(object sender, EventArgs e)
         {
 
-            
 
-            // Если файл существует, загружаем существующие данные
+            lastAction.Text = "Список";
+
             if (File.Exists("computers.json"))
             {
                 string json = File.ReadAllText("computers.json");
@@ -330,6 +331,9 @@ namespace Lab02
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            lastAction.Text = "О программе";
+
             MessageBox.Show("Version: 0.1\n\n\nDeveloper: Korobov E.O.", "Инфо", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -345,6 +349,295 @@ namespace Lab02
         private void timer1_Tick(object sender, EventArgs e)
         {
             toolStriptime.Text = $"{DateTime.Now}";
+        }
+
+        private void PCType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void стоимостиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            lastAction.Text = "Сортировка";
+
+            List<Computer> computers = new List<Computer>();
+            string json = File.ReadAllText("computers.json");
+            computers = JsonSerializer.Deserialize<List<Computer>>(json) ?? new List<Computer>();
+
+            var sorted = computers
+                .OrderByDescending(p => p.price)
+                .ToList();
+
+
+            search newSearch = new search(sorted, "Sorted_by_price");
+            newSearch.ShowDialog();
+
+
+        }
+
+        private void размеруОЗУToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            lastAction.Text = "Сортировка";
+
+
+            List<Computer> computers = new List<Computer>();
+            string json = File.ReadAllText("computers.json");
+            computers = JsonSerializer.Deserialize<List<Computer>>(json) ?? new List<Computer>();
+            
+            var sorted = computers
+                .OrderByDescending(p => p.buyDate)
+                .ToList();
+
+
+            search newSearch = new search(sorted, "Sorted_by_buyDate");
+            newSearch.ShowDialog();
+
+
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+            lastAction.Text = "Очистка";
+
+            PCType.Text = "";
+            RAMSize.ResetText();
+            memorySize.Value = 120;
+            this.lblFrequency.Text = this.memorySize.Value.ToString();
+            memoryType.Text = "";
+            buyDate.Value = DateTime.Now;
+            comboBoxProcessor.Text = "";
+            comboBoxGraphicsCard.Text = "";
+            ComputerPrice.Text = "00000";
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripLabel2_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            toolStrip1.Visible = !toolStrip1.Visible;
+            button3.Text = (button3.Text == "Скрыть") ? "Показать" : "Скрыть";
+        }
+
+        private void поискToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            lastAction.Text = "Поиск";
+
+            Find find = new Find();
+            if(find.ShowDialog() == DialogResult.OK)
+            {
+                string request = find.GetRequest();
+                List<Computer> fbf = new List<Computer>();
+
+                bool isRegexValid = false;
+                Regex regex = null;
+
+
+                try
+                {
+                    regex = new Regex(request.Trim(), RegexOptions.IgnoreCase);
+                    isRegexValid = true;
+                }
+                catch
+                {
+                    isRegexValid = false;
+                }
+
+                if (string.IsNullOrWhiteSpace(request))
+                    fbf = computers.ToList();
+
+                else
+                {
+
+                    if (isRegexValid)
+                    {
+                        fbf = computers.Where(comp =>
+                            regex.IsMatch(comp.processor) ||
+                            regex.IsMatch(comp.computerType) ||
+                            regex.IsMatch(comp.card) ||
+                            regex.IsMatch(comp.price.ToString()) ||
+                            regex.IsMatch(comp.buyDate.ToString())).ToList();
+                    }
+
+
+                    else
+                    {
+                        request = request.Trim().ToLower();
+
+                        fbf = computers
+                            .Where(comp =>
+                                (comp.processor).Contains(request) ||
+                                comp.card.Contains(request) ||
+                                (comp.computerType.ToLower() ?? "").Contains(request) ||
+                                comp.price.ToString().Contains(request) ||
+                                (comp.buyDate.ToString().ToLower() ?? "").Contains(request))
+                            .ToList();
+                    }
+
+                }
+
+
+
+                search find1 = new search(fbf, "find_computers");
+                find1.ShowDialog();
+
+            }
+
+        }
+
+        private void toolStripLabel2_Click_1(object sender, EventArgs e)
+        {
+
+            lastAction.Text = "Поиск";
+
+
+            Find find = new Find();
+            if (find.ShowDialog() == DialogResult.OK)
+            {
+                string request = find.GetRequest();
+                List<Computer> fbf = new List<Computer>();
+
+                bool isRegexValid = false;
+                Regex regex = null;
+
+
+                try
+                {
+                    regex = new Regex(request.Trim(), RegexOptions.IgnoreCase);
+                    isRegexValid = true;
+                }
+                catch
+                {
+                    isRegexValid = false;
+                }
+
+                if (string.IsNullOrWhiteSpace(request))
+                    fbf = computers.ToList();
+
+                else
+                {
+
+                    if (isRegexValid)
+                    {
+                        fbf = computers.Where(comp =>
+                            regex.IsMatch(comp.processor) ||
+                            regex.IsMatch(comp.computerType) ||
+                            regex.IsMatch(comp.card) ||
+                            regex.IsMatch(comp.price.ToString()) ||
+                            regex.IsMatch(comp.buyDate.ToString())).ToList();
+                    }
+
+
+                    else
+                    {
+                        request = request.Trim().ToLower();
+
+                        fbf = computers
+                            .Where(comp =>
+                                (comp.processor).Contains(request) ||
+                                comp.card.Contains(request) ||
+                                (comp.computerType.ToLower() ?? "").Contains(request) ||
+                                comp.price.ToString().Contains(request) ||
+                                (comp.buyDate.ToString().ToLower() ?? "").Contains(request))
+                            .ToList();
+                    }
+
+                }
+
+
+
+                search find1 = new search(fbf, "find_computers");
+                find1.ShowDialog();
+
+            }
+
+
+        }
+
+        private void toolStripComboBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void сортировкаПоДатеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            lastAction.Text = "Сортировка";
+
+            List<Computer> computers = new List<Computer>();
+            string json = File.ReadAllText("computers.json");
+            computers = JsonSerializer.Deserialize<List<Computer>>(json) ?? new List<Computer>();
+
+            var sorted = computers
+                .OrderByDescending(p => p.buyDate)
+                .ToList();
+
+
+            search newSearch = new search(sorted, "Sorted_by_buyDate");
+            newSearch.ShowDialog();
+
+        }
+
+        private void сортировкаПоЦенеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lastAction.Text = "Сортировка";
+
+            List<Computer> computers = new List<Computer>();
+            string json = File.ReadAllText("computers.json");
+            computers = JsonSerializer.Deserialize<List<Computer>>(json) ?? new List<Computer>();
+
+            var sorted = computers
+                .OrderByDescending(p => p.price)
+                .ToList();
+
+
+            search newSearch = new search(sorted, "Sorted_by_price");
+            newSearch.ShowDialog();
+
+
+        }
+
+        private void toolStripLabel5_Click(object sender, EventArgs e)
+        {
+            File.Delete("computers.json");
+            MessageBox.Show("\"Computers.json\" удален");
+
+
+        }
+
+        private void toolStripLabel3_Click(object sender, EventArgs e)
+        {
+            File.Copy("computers.json", "Nextcomputers.json", true);
+            File.Copy("prevComputers.json", "computers.json", true);
+            MessageBox.Show("Откат на 1");
+            backButton.Enabled = false;
+            nextButton.Enabled = true;
+
+        }
+
+        private void toolStripLabel4_Click(object sender, EventArgs e)
+        {
+
+            File.Copy("computers.json", "prevComputers.json", true);
+            File.Copy("nextComputers.json", "computers.json", true);
+            MessageBox.Show("Наткат на 1");
+            backButton.Enabled = true;
+            nextButton.Enabled = false;
         }
     }
 }

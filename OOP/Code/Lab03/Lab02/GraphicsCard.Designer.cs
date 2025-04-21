@@ -37,7 +37,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.bntCalculate = new System.Windows.Forms.Button();
             this.txtModel = new System.Windows.Forms.TextBox();
             this.txtSeries = new System.Windows.Forms.TextBox();
             this.txtMemorySize = new System.Windows.Forms.TextBox();
@@ -144,17 +143,6 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // bntCalculate
-            // 
-            this.bntCalculate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bntCalculate.Location = new System.Drawing.Point(459, 450);
-            this.bntCalculate.Name = "bntCalculate";
-            this.bntCalculate.Size = new System.Drawing.Size(126, 31);
-            this.bntCalculate.TabIndex = 40;
-            this.bntCalculate.Text = "Рассчитать";
-            this.bntCalculate.UseVisualStyleBackColor = true;
-            this.bntCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
-            // 
             // txtModel
             // 
             this.txtModel.Location = new System.Drawing.Point(295, 129);
@@ -187,6 +175,7 @@
             this.cmbMemoryType.Name = "cmbMemoryType";
             this.cmbMemoryType.Size = new System.Drawing.Size(100, 21);
             this.cmbMemoryType.TabIndex = 44;
+            this.cmbMemoryType.Text = "Выберите тип";
             // 
             // txtGPUClock
             // 
@@ -257,7 +246,6 @@
             this.Controls.Add(this.txtMemorySize);
             this.Controls.Add(this.txtSeries);
             this.Controls.Add(this.txtModel);
-            this.Controls.Add(this.bntCalculate);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -285,7 +273,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button bntCalculate;
         private System.Windows.Forms.TextBox txtModel;
         private System.Windows.Forms.TextBox txtSeries;
         private System.Windows.Forms.TextBox txtMemorySize;

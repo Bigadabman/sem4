@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompCreate));
             this.label1 = new System.Windows.Forms.Label();
             this.PCType = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,6 +48,10 @@
             this.файлыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.процессорыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видеокартыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сортировкаПоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.размеруОЗУToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.стоимостиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.lblFrequency = new System.Windows.Forms.Label();
@@ -56,22 +61,34 @@
             this.ComputerPrice = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.ComputerList = new System.Windows.Forms.ListBox();
-            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripCompAmount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStriptime = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.поискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.сортировкаПоДатеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сортировкаПоЦенеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lastAction = new System.Windows.Forms.ToolStripStatusLabel();
+            this.backButton = new System.Windows.Forms.ToolStripLabel();
+            this.nextButton = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.RAMSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memorySize)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label1.Location = new System.Drawing.Point(29, 46);
+            this.label1.Location = new System.Drawing.Point(24, 62);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(169, 25);
             this.label1.TabIndex = 0;
@@ -85,16 +102,17 @@
             "Server",
             "PC",
             "Laptop"});
-            this.PCType.Location = new System.Drawing.Point(232, 43);
+            this.PCType.Location = new System.Drawing.Point(227, 59);
             this.PCType.Name = "PCType";
             this.PCType.Size = new System.Drawing.Size(121, 28);
             this.PCType.TabIndex = 1;
+            this.PCType.SelectedIndexChanged += new System.EventHandler(this.PCType_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label2.Location = new System.Drawing.Point(29, 98);
+            this.label2.Location = new System.Drawing.Point(24, 114);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 25);
             this.label2.TabIndex = 2;
@@ -104,7 +122,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label3.Location = new System.Drawing.Point(28, 150);
+            this.label3.Location = new System.Drawing.Point(23, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(122, 25);
             this.label3.TabIndex = 3;
@@ -114,7 +132,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label4.Location = new System.Drawing.Point(29, 209);
+            this.label4.Location = new System.Drawing.Point(24, 225);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(129, 25);
             this.label4.TabIndex = 6;
@@ -123,7 +141,7 @@
             // RAMSize
             // 
             this.RAMSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.RAMSize.Location = new System.Drawing.Point(231, 212);
+            this.RAMSize.Location = new System.Drawing.Point(226, 228);
             this.RAMSize.Maximum = new decimal(new int[] {
             64,
             0,
@@ -137,7 +155,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label5.Location = new System.Drawing.Point(29, 269);
+            this.label5.Location = new System.Drawing.Point(24, 285);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 25);
             this.label5.TabIndex = 8;
@@ -148,7 +166,7 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
             this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.radioButton1.Location = new System.Drawing.Point(232, 269);
+            this.radioButton1.Location = new System.Drawing.Point(227, 285);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(72, 24);
             this.radioButton1.TabIndex = 9;
@@ -161,7 +179,7 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.radioButton3.Location = new System.Drawing.Point(310, 269);
+            this.radioButton3.Location = new System.Drawing.Point(305, 285);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(72, 24);
             this.radioButton3.TabIndex = 11;
@@ -172,7 +190,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label6.Location = new System.Drawing.Point(29, 317);
+            this.label6.Location = new System.Drawing.Point(24, 337);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(144, 25);
             this.label6.TabIndex = 12;
@@ -185,7 +203,7 @@
             this.memoryType.Items.AddRange(new object[] {
             "HDD",
             "SSD"});
-            this.memoryType.Location = new System.Drawing.Point(232, 314);
+            this.memoryType.Location = new System.Drawing.Point(227, 334);
             this.memoryType.Name = "memoryType";
             this.memoryType.Size = new System.Drawing.Size(121, 28);
             this.memoryType.TabIndex = 13;
@@ -193,7 +211,7 @@
             // memorySize
             // 
             this.memorySize.LargeChange = 20;
-            this.memorySize.Location = new System.Drawing.Point(143, 369);
+            this.memorySize.Location = new System.Drawing.Point(138, 389);
             this.memorySize.Maximum = 2048;
             this.memorySize.Minimum = 120;
             this.memorySize.Name = "memorySize";
@@ -207,7 +225,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label7.Location = new System.Drawing.Point(29, 420);
+            this.label7.Location = new System.Drawing.Point(24, 440);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(199, 25);
             this.label7.TabIndex = 15;
@@ -218,7 +236,7 @@
             this.buyDate.CustomFormat = "dd MMMM yyyyг";
             this.buyDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.buyDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.buyDate.Location = new System.Drawing.Point(234, 420);
+            this.buyDate.Location = new System.Drawing.Point(229, 440);
             this.buyDate.MaxDate = new System.DateTime(2025, 12, 31, 0, 0, 0, 0);
             this.buyDate.MinDate = new System.DateTime(2018, 1, 1, 0, 0, 0, 0);
             this.buyDate.Name = "buyDate";
@@ -230,6 +248,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлыToolStripMenuItem,
+            this.поискToolStripMenuItem,
+            this.сортировкаПоToolStripMenuItem,
             this.оПрограммеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -251,21 +271,51 @@
             // процессорыToolStripMenuItem
             // 
             this.процессорыToolStripMenuItem.Name = "процессорыToolStripMenuItem";
-            this.процессорыToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.процессорыToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
             this.процессорыToolStripMenuItem.Text = "Процессоры";
             this.процессорыToolStripMenuItem.Click += new System.EventHandler(this.процессорыToolStripMenuItem_Click);
             // 
             // видеокартыToolStripMenuItem
             // 
             this.видеокартыToolStripMenuItem.Name = "видеокартыToolStripMenuItem";
-            this.видеокартыToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.видеокартыToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
             this.видеокартыToolStripMenuItem.Text = "Видеокарты";
             this.видеокартыToolStripMenuItem.Click += new System.EventHandler(this.видеокартыToolStripMenuItem_Click);
+            // 
+            // сортировкаПоToolStripMenuItem
+            // 
+            this.сортировкаПоToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.размеруОЗУToolStripMenuItem,
+            this.стоимостиToolStripMenuItem});
+            this.сортировкаПоToolStripMenuItem.Name = "сортировкаПоToolStripMenuItem";
+            this.сортировкаПоToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
+            this.сортировкаПоToolStripMenuItem.Text = "Сортировка по";
+            // 
+            // размеруОЗУToolStripMenuItem
+            // 
+            this.размеруОЗУToolStripMenuItem.Name = "размеруОЗУToolStripMenuItem";
+            this.размеруОЗУToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.размеруОЗУToolStripMenuItem.Text = "Дате Приобретения";
+            this.размеруОЗУToolStripMenuItem.Click += new System.EventHandler(this.размеруОЗУToolStripMenuItem_Click);
+            // 
+            // стоимостиToolStripMenuItem
+            // 
+            this.стоимостиToolStripMenuItem.Name = "стоимостиToolStripMenuItem";
+            this.стоимостиToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.стоимостиToolStripMenuItem.Text = "Стоимости";
+            this.стоимостиToolStripMenuItem.Click += new System.EventHandler(this.стоимостиToolStripMenuItem_Click);
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.button1.Location = new System.Drawing.Point(621, 504);
+            this.button1.Location = new System.Drawing.Point(616, 524);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(126, 31);
             this.button1.TabIndex = 38;
@@ -277,7 +327,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(70, 369);
+            this.label8.Location = new System.Drawing.Point(65, 389);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 18);
             this.label8.TabIndex = 40;
@@ -287,7 +337,7 @@
             // 
             this.lblFrequency.AutoSize = true;
             this.lblFrequency.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblFrequency.Location = new System.Drawing.Point(405, 382);
+            this.lblFrequency.Location = new System.Drawing.Point(400, 402);
             this.lblFrequency.Name = "lblFrequency";
             this.lblFrequency.Size = new System.Drawing.Size(40, 24);
             this.lblFrequency.TabIndex = 41;
@@ -296,7 +346,7 @@
             // comboBoxProcessor
             // 
             this.comboBoxProcessor.FormattingEnabled = true;
-            this.comboBoxProcessor.Location = new System.Drawing.Point(231, 113);
+            this.comboBoxProcessor.Location = new System.Drawing.Point(226, 129);
             this.comboBoxProcessor.Name = "comboBoxProcessor";
             this.comboBoxProcessor.Size = new System.Drawing.Size(122, 21);
             this.comboBoxProcessor.TabIndex = 42;
@@ -304,7 +354,7 @@
             // comboBoxGraphicsCard
             // 
             this.comboBoxGraphicsCard.FormattingEnabled = true;
-            this.comboBoxGraphicsCard.Location = new System.Drawing.Point(229, 156);
+            this.comboBoxGraphicsCard.Location = new System.Drawing.Point(224, 172);
             this.comboBoxGraphicsCard.Name = "comboBoxGraphicsCard";
             this.comboBoxGraphicsCard.Size = new System.Drawing.Size(122, 21);
             this.comboBoxGraphicsCard.TabIndex = 43;
@@ -313,7 +363,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(35, 491);
+            this.label9.Location = new System.Drawing.Point(30, 511);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(138, 20);
             this.label9.TabIndex = 44;
@@ -324,7 +374,7 @@
             // 
             this.ComputerPrice.AutoSize = true;
             this.ComputerPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ComputerPrice.Location = new System.Drawing.Point(239, 498);
+            this.ComputerPrice.Location = new System.Drawing.Point(234, 518);
             this.ComputerPrice.Name = "ComputerPrice";
             this.ComputerPrice.Size = new System.Drawing.Size(54, 20);
             this.ComputerPrice.TabIndex = 45;
@@ -333,7 +383,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(478, 504);
+            this.button2.Location = new System.Drawing.Point(473, 524);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(105, 31);
             this.button2.TabIndex = 46;
@@ -346,24 +396,18 @@
             this.ComputerList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ComputerList.FormattingEnabled = true;
             this.ComputerList.ItemHeight = 20;
-            this.ComputerList.Location = new System.Drawing.Point(465, 58);
+            this.ComputerList.Location = new System.Drawing.Point(460, 74);
             this.ComputerList.Name = "ComputerList";
             this.ComputerList.Size = new System.Drawing.Size(239, 184);
             this.ComputerList.TabIndex = 47;
-            // 
-            // оПрограммеToolStripMenuItem
-            // 
-            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
-            this.оПрограммеToolStripMenuItem.Text = "О программе";
-            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripCompAmount,
+            this.lastAction,
             this.toolStriptime});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 539);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 582);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(774, 22);
             this.statusStrip1.TabIndex = 48;
@@ -389,11 +433,114 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel2,
+            this.toolStripLabel1,
+            this.toolStripSplitButton1,
+            this.backButton,
+            this.nextButton,
+            this.toolStripLabel5});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(774, 25);
+            this.toolStrip1.TabIndex = 49;
+            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(59, 22);
+            this.toolStripLabel1.Text = "Очистить";
+            this.toolStripLabel1.Click += new System.EventHandler(this.toolStripLabel1_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(691, 28);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(71, 20);
+            this.button3.TabIndex = 50;
+            this.button3.Text = "Скрыть";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // поискToolStripMenuItem
+            // 
+            this.поискToolStripMenuItem.Name = "поискToolStripMenuItem";
+            this.поискToolStripMenuItem.Size = new System.Drawing.Size(54, 24);
+            this.поискToolStripMenuItem.Text = "Поиск";
+            this.поискToolStripMenuItem.Click += new System.EventHandler(this.поискToolStripMenuItem_Click);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(42, 22);
+            this.toolStripLabel2.Text = "Поиск";
+            this.toolStripLabel2.Click += new System.EventHandler(this.toolStripLabel2_Click_1);
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сортировкаПоДатеToolStripMenuItem,
+            this.сортировкаПоЦенеToolStripMenuItem});
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(89, 22);
+            this.toolStripSplitButton1.Text = "Сортировка";
+            // 
+            // сортировкаПоДатеToolStripMenuItem
+            // 
+            this.сортировкаПоДатеToolStripMenuItem.Name = "сортировкаПоДатеToolStripMenuItem";
+            this.сортировкаПоДатеToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.сортировкаПоДатеToolStripMenuItem.Text = "Сортировка по дате";
+            this.сортировкаПоДатеToolStripMenuItem.Click += new System.EventHandler(this.сортировкаПоДатеToolStripMenuItem_Click);
+            // 
+            // сортировкаПоЦенеToolStripMenuItem
+            // 
+            this.сортировкаПоЦенеToolStripMenuItem.Name = "сортировкаПоЦенеToolStripMenuItem";
+            this.сортировкаПоЦенеToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.сортировкаПоЦенеToolStripMenuItem.Text = "Сортировка по цене";
+            this.сортировкаПоЦенеToolStripMenuItem.Click += new System.EventHandler(this.сортировкаПоЦенеToolStripMenuItem_Click);
+            // 
+            // lastAction
+            // 
+            this.lastAction.Name = "lastAction";
+            this.lastAction.Size = new System.Drawing.Size(60, 17);
+            this.lastAction.Text = "lastAction";
+            // 
+            // backButton
+            // 
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(39, 22);
+            this.backButton.Text = "Назад";
+            this.backButton.Click += new System.EventHandler(this.toolStripLabel3_Click);
+            // 
+            // nextButton
+            // 
+            this.nextButton.Enabled = false;
+            this.nextButton.Name = "nextButton";
+            this.nextButton.Size = new System.Drawing.Size(46, 22);
+            this.nextButton.Text = "Вперед";
+            this.nextButton.Click += new System.EventHandler(this.toolStripLabel4_Click);
+            // 
+            // toolStripLabel5
+            // 
+            this.toolStripLabel5.Name = "toolStripLabel5";
+            this.toolStripLabel5.Size = new System.Drawing.Size(51, 22);
+            this.toolStripLabel5.Text = "Удалить";
+            this.toolStripLabel5.Click += new System.EventHandler(this.toolStripLabel5_Click);
+            // 
             // CompCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 561);
+            this.ClientSize = new System.Drawing.Size(774, 604);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ComputerList);
             this.Controls.Add(this.button2);
@@ -429,6 +576,8 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -468,6 +617,21 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripCompAmount;
         private System.Windows.Forms.ToolStripStatusLabel toolStriptime;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem сортировкаПоToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem размеруОЗУToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem стоимостиToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolStripMenuItem поискToolStripMenuItem;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripMenuItem сортировкаПоДатеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сортировкаПоЦенеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel lastAction;
+        private System.Windows.Forms.ToolStripLabel backButton;
+        private System.Windows.Forms.ToolStripLabel nextButton;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
     }
 
 

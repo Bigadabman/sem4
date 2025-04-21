@@ -4,13 +4,16 @@ using System.IO;
 using System.Windows.Forms;
 using System.Text.Json;
 using System.Xml.Serialization;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using static Lab02.Processor;
 namespace Lab02
 {
     public partial class Processor : Form
     {
 
         private string saveFilePath = "processors.json";
-
+        
         public Processor()
         {
             InitializeComponent();
@@ -54,38 +57,37 @@ namespace Lab02
         }
 
 
-        private void btnCalculate_Click(object sender, EventArgs e)
-            {
-                if (ValidateInputs(txtModel, txtSeries, txtCores, txtFrequency, txtMaxFrequency, txtCache))
-                {
-                    int architecture = rbX64.Checked ? 64 : 32;
-        decimal performance = CalculatePerformance(
-            int.Parse(txtCores.Text),
-            txtFrequency.Value,
-            decimal.Parse(txtMaxFrequency.Text),
-            int.Parse(txtCache.Text),
-            architecture
-        );
-        lblCalculatedPerformance.Text = $"{performance:N0} баллов";
-                }
-}
-
 private void btnSave_Click (object sender, EventArgs e) 
 {
-    if (ValidateInputs(txtModel, txtSeries, txtCores, txtFrequency, txtMaxFrequency, txtCache))
-    {
-        var processor = new Processors
+            
+            
+            var processor = new Processors
         {
-            Model = txtModel.Text,
-            Series = txtSeries.Text,
-            Cores = int.Parse(txtCores.Text),
-            Frequency = (txtFrequency.Value),
-            MaxFrequency = decimal.Parse(txtMaxFrequency.Text),
-            Architecture = rbX64.Checked ? "x64" : "x86",
-            CacheSize = int.Parse(txtCache.Text),
-            Performance = decimal.Parse(lblCalculatedPerformance.Text.Replace(" BYN", "").Replace(",", ""))
-        };
+                Model = txtModel.Text,
+                Series = txtSeries.Text,
+                Cores = int.Parse(txtCores.Text),
+                Frequency = (txtFrequency.Value),
+                MaxFrequency = decimal.Parse(txtMaxFrequency.Text),
+                Architecture = rbX64.Checked ? "x64" : "x86",
+                CacheSize = int.Parse(txtCache.Text),
 
+            };
+
+
+    if (ValidateInputs(processor))
+    {
+                int architecture = rbX64.Checked ? 64 : 32;
+                decimal performance = CalculatePerformance(
+                    int.Parse(txtCores.Text),
+                    txtFrequency.Value,
+                    decimal.Parse(txtMaxFrequency.Text),
+                    int.Parse(txtCache.Text),
+                    architecture
+                );
+                lblCalculatedPerformance.Text = $"{performance:N0} баллов";
+
+
+                processor.Performance = decimal.Parse(lblCalculatedPerformance.Text.Replace(" BYN", "").Replace(",", ""));
         try
         {
             SaveProcessorToJson(processor);
@@ -97,51 +99,25 @@ private void btnSave_Click (object sender, EventArgs e)
         }
     }
 }
-        
 
-     private bool ValidateInputs(TextBox txtModel, TextBox txtSeries, NumericUpDown txtCores,
-                                      TrackBar txtFrequency, TextBox txtMaxFrequency, TextBox txtCache)
-    {
-        if (string.IsNullOrWhiteSpace(txtModel.Text))
+
+        private bool ValidateInputs(Processors processor)
         {
-            MessageBox.Show("Введите модель процессора!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
+            var context = new ValidationContext(processor);
+            var errors = new List<ValidationResult>();
+
+            if (!Validator.TryValidateObject(processor, context, errors, true))
+            {
+                foreach (var error in errors)
+                {
+                    MessageBox.Show(error.ErrorMessage);
+                }
+                return false;
+            }
+            return true;
         }
 
-        if (string.IsNullOrWhiteSpace(txtSeries.Text))
-        {
-            MessageBox.Show("Введите серию процессора!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
-        }
-
-        if (!int.TryParse(txtCores.Text, out int cores) || cores <= 0 || cores > 128)
-        {
-            MessageBox.Show("Введите корректное количество ядер (1-128)!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
-        }
-
-        if (txtFrequency.Value <= 0 || txtFrequency.Value > 5500)
-        {
-            MessageBox.Show("Введите корректную частоту (1-5500 МГц)!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
-        }
-
-        if (!decimal.TryParse(txtMaxFrequency.Text, out decimal maxFreq) || maxFreq <= 0 || maxFreq > 5500 || maxFreq < txtFrequency.Value)
-        {
-            MessageBox.Show("Введите корректную максимальную частоту (1-5500 МГц)!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
-        }
-
-        if (!int.TryParse(txtCache.Text, out int cache) || cache <= 0 || cache > 128)
-        {
-            MessageBox.Show("Введите корректный размер кэша (1-128 МБ)!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
-        }
-
-        return true;
-    }
-
-    private decimal CalculatePerformance(int cores, decimal frequency, decimal maxFrequency, int cacheSize, int architecture)
+        private decimal CalculatePerformance(int cores, decimal frequency, decimal maxFrequency, int cacheSize, int architecture)
     {
         // Формула для расчета производительности (условная)
         decimal performance = cores * (frequency + maxFrequency) / (2 * 100);
@@ -173,13 +149,32 @@ private void btnSave_Click (object sender, EventArgs e)
 
     public class Processors
     {
+
+            [Required(ErrorMessage = "Модель обязательна")]
+            [StringLength(15, MinimumLength = 2, ErrorMessage = "Длина от 2 до 15")]
         public string Model { get; set; }
-        public string Series { get; set; }
+
+            [Required(ErrorMessage = "Серия обязательна")]
+            [StringLength(15, MinimumLength = 2, ErrorMessage = "Длина от 2 до 15")]
+            public string Series { get; set; }
+            [Required(ErrorMessage = "Введите количество ядер")]
+            [Range(1, 128, ErrorMessage = "Количество ядер от  1 до 128")]
         public int Cores { get; set; }
+
+            [Required(ErrorMessage = "Введите частоту")]
+            [Range(1, 5500, ErrorMessage = "Частота от 1 до 5500 МГц")]
         public decimal Frequency { get; set; }
-        public decimal MaxFrequency { get; set; }
+
+            [Required(ErrorMessage = "Введите максимальную частоту")]
+            [Range(1, 5500, ErrorMessage = "Максимальная частота от 1 до 5500 МГц")]
+            public decimal? MaxFrequency { get; set; }
+
+            [RegularExpression("^(x86|x64)?", ErrorMessage = "Архитектура x86 или х64")]
         public string Architecture { get; set; }
-        public int CacheSize { get; set; }
+
+            [Required(ErrorMessage = "Введите объем кэша")]
+            [Range(1, 128, ErrorMessage = "Кэш от 1 до 128")]
+        public int? CacheSize { get; set; }
         public decimal Performance { get; set; }
 
             public string DisplayInfo => $"{Series} {Model}";
@@ -206,7 +201,14 @@ private void btnSave_Click (object sender, EventArgs e)
 
         }
 
-
+        private void CoreAmountSort_Click(object sender, EventArgs e)
+        {
         
+        }
+
+        private void FrequencySort_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

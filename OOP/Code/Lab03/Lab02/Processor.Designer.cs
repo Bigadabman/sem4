@@ -47,7 +47,6 @@
             this.lblCalculatedPerformance = new System.Windows.Forms.Label();
             this.rbX64 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.btnCalculatePerformance = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtFrequency)).BeginInit();
@@ -57,7 +56,7 @@
             // txtCache
             // 
             this.txtCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtCache.Location = new System.Drawing.Point(281, 350);
+            this.txtCache.Location = new System.Drawing.Point(284, 365);
             this.txtCache.Name = "txtCache";
             this.txtCache.Size = new System.Drawing.Size(100, 26);
             this.txtCache.TabIndex = 52;
@@ -67,7 +66,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label16.Location = new System.Drawing.Point(42, 350);
+            this.label16.Location = new System.Drawing.Point(45, 365);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(136, 25);
             this.label16.TabIndex = 51;
@@ -77,7 +76,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label15.Location = new System.Drawing.Point(42, 293);
+            this.label15.Location = new System.Drawing.Point(45, 308);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(259, 25);
             this.label15.TabIndex = 49;
@@ -86,7 +85,7 @@
             // 
             // txtMaxFrequency
             // 
-            this.txtMaxFrequency.Location = new System.Drawing.Point(331, 252);
+            this.txtMaxFrequency.Location = new System.Drawing.Point(334, 267);
             this.txtMaxFrequency.Name = "txtMaxFrequency";
             this.txtMaxFrequency.Size = new System.Drawing.Size(71, 20);
             this.txtMaxFrequency.TabIndex = 48;
@@ -95,7 +94,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.label14.Location = new System.Drawing.Point(99, 250);
+            this.label14.Location = new System.Drawing.Point(102, 265);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(204, 22);
             this.label14.TabIndex = 47;
@@ -104,7 +103,7 @@
             // txtFrequency
             // 
             this.txtFrequency.LargeChange = 1;
-            this.txtFrequency.Location = new System.Drawing.Point(281, 212);
+            this.txtFrequency.Location = new System.Drawing.Point(284, 227);
             this.txtFrequency.Maximum = 5500;
             this.txtFrequency.Minimum = 1;
             this.txtFrequency.Name = "txtFrequency";
@@ -118,7 +117,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label13.Location = new System.Drawing.Point(42, 212);
+            this.label13.Location = new System.Drawing.Point(45, 227);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(90, 25);
             this.label13.TabIndex = 45;
@@ -127,7 +126,7 @@
             // txtCores
             // 
             this.txtCores.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtCores.Location = new System.Drawing.Point(281, 157);
+            this.txtCores.Location = new System.Drawing.Point(284, 183);
             this.txtCores.Maximum = new decimal(new int[] {
             160,
             0,
@@ -141,7 +140,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label12.Location = new System.Drawing.Point(42, 155);
+            this.label12.Location = new System.Drawing.Point(45, 181);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(173, 25);
             this.label12.TabIndex = 43;
@@ -150,7 +149,7 @@
             // txtModel
             // 
             this.txtModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtModel.Location = new System.Drawing.Point(650, 103);
+            this.txtModel.Location = new System.Drawing.Point(653, 129);
             this.txtModel.Name = "txtModel";
             this.txtModel.Size = new System.Drawing.Size(121, 26);
             this.txtModel.TabIndex = 42;
@@ -160,7 +159,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label11.Location = new System.Drawing.Point(490, 98);
+            this.label11.Location = new System.Drawing.Point(493, 124);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(84, 25);
             this.label11.TabIndex = 41;
@@ -170,7 +169,7 @@
             // txtSeries
             // 
             this.txtSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtSeries.Location = new System.Drawing.Point(281, 103);
+            this.txtSeries.Location = new System.Drawing.Point(284, 129);
             this.txtSeries.Name = "txtSeries";
             this.txtSeries.Size = new System.Drawing.Size(121, 26);
             this.txtSeries.TabIndex = 40;
@@ -180,7 +179,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label10.Location = new System.Drawing.Point(42, 98);
+            this.label10.Location = new System.Drawing.Point(45, 124);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(69, 25);
             this.label10.TabIndex = 39;
@@ -190,7 +189,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label9.Location = new System.Drawing.Point(42, 46);
+            this.label9.Location = new System.Drawing.Point(45, 72);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(159, 25);
             this.label9.TabIndex = 37;
@@ -201,7 +200,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label8.Location = new System.Drawing.Point(12, 9);
+            this.label8.Location = new System.Drawing.Point(15, 35);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(269, 25);
             this.label8.TabIndex = 36;
@@ -210,7 +209,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.btnSave.Location = new System.Drawing.Point(645, 389);
+            this.btnSave.Location = new System.Drawing.Point(648, 404);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(126, 31);
             this.btnSave.TabIndex = 53;
@@ -221,7 +220,7 @@
             // lblCalculatedPerformance
             // 
             this.lblCalculatedPerformance.AutoSize = true;
-            this.lblCalculatedPerformance.Location = new System.Drawing.Point(593, 237);
+            this.lblCalculatedPerformance.Location = new System.Drawing.Point(596, 252);
             this.lblCalculatedPerformance.Name = "lblCalculatedPerformance";
             this.lblCalculatedPerformance.Size = new System.Drawing.Size(115, 13);
             this.lblCalculatedPerformance.TabIndex = 54;
@@ -232,7 +231,7 @@
             // 
             this.rbX64.AutoSize = true;
             this.rbX64.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.rbX64.Location = new System.Drawing.Point(365, 295);
+            this.rbX64.Location = new System.Drawing.Point(368, 310);
             this.rbX64.Name = "rbX64";
             this.rbX64.Size = new System.Drawing.Size(52, 24);
             this.rbX64.TabIndex = 32;
@@ -244,24 +243,13 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.radioButton2.Location = new System.Drawing.Point(307, 295);
+            this.radioButton2.Location = new System.Drawing.Point(310, 310);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(52, 24);
             this.radioButton2.TabIndex = 31;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "x86";
             this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // btnCalculatePerformance
-            // 
-            this.btnCalculatePerformance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnCalculatePerformance.Location = new System.Drawing.Point(484, 390);
-            this.btnCalculatePerformance.Name = "btnCalculatePerformance";
-            this.btnCalculatePerformance.Size = new System.Drawing.Size(126, 31);
-            this.btnCalculatePerformance.TabIndex = 55;
-            this.btnCalculatePerformance.Text = "Рассчитать";
-            this.btnCalculatePerformance.UseVisualStyleBackColor = true;
-            this.btnCalculatePerformance.Click += new System.EventHandler(this.btnCalculate_Click);
             // 
             // comboBox1
             // 
@@ -270,7 +258,7 @@
             "Intel",
             "AMD",
             "qualcomm"});
-            this.comboBox1.Location = new System.Drawing.Point(281, 46);
+            this.comboBox1.Location = new System.Drawing.Point(284, 72);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 56;
@@ -279,7 +267,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(470, 221);
+            this.label1.Location = new System.Drawing.Point(473, 236);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 24);
             this.label1.TabIndex = 57;
@@ -292,7 +280,6 @@
             this.ClientSize = new System.Drawing.Size(800, 449);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.btnCalculatePerformance);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.lblCalculatedPerformance);
             this.Controls.Add(this.rbX64);
@@ -343,7 +330,6 @@
         private System.Windows.Forms.Label lblCalculatedPerformance;
         private System.Windows.Forms.RadioButton rbX64;
         private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.Button btnCalculatePerformance;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
     }
