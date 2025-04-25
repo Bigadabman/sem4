@@ -78,10 +78,13 @@ export function calculating(){
     }
 
     catch (error: any){
+
         
         switch(error.message){
             case 'expected expression, got end of script' : resulting.textContent = 'expression is not full'; break;
-            default: resulting.textContent = error.message;
+            case 'unterminated regular expression literal': resulting.textContent = 'expression is not full'; break;
+             default: resulting.textContent = error.message;
+
         }
 
     }
@@ -92,16 +95,30 @@ export function calculating(){
 
 
 export function MyButton(props: IProps) {
-    
+    let printing: string[] = ['.', '/', '*', '-', '+'];
     function print (){
+        
         let screen: HTMLElement|null = document?.getElementById('expression');
         if(screen == null || screen.textContent == null)
             throw new DOMException('no screen')
         
         else{
-            
-
-        screen.textContent += props.title;
+            let numbers = screen.textContent.split(/^-|\+|\/|\*$/)
+                let lastNumber = numbers[numbers.length -1];
+            if(/^(0)+$/.test(lastNumber.trim()) && /^[0-9]$/.test(props.title)
+                    || lastNumber.includes('.') && props.title == '.'
+                    || (printing.includes(screen.textContent[screen.textContent.length-1]) && props.title == '.')
+                    || lastNumber == ' ' && printing.includes(props.title)
+            )
+                return
+            else if (printing.includes(screen.textContent[screen.textContent.length-1]) 
+                && printing.includes(props.title))
+                {
+                    backspace()
+                    screen.textContent += props.title;
+                }
+            else
+                screen.textContent += props.title;
         }
     }
 

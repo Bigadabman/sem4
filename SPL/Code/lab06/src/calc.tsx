@@ -32,8 +32,29 @@ export function Calculator(){
         
         else{
 
-            if(printing.includes(e.key) || (e.key >='0' && e.key <='9'))
-                screen.textContent += e.key;
+            if(printing.includes(e.key) || (e.key >='0' && e.key <='9')){
+
+                let numbers = screen.textContent.split(/(\-|\+|\*|\/)/)
+                let lastNumber = numbers[numbers.length -1];
+                console.log(lastNumber);
+                if( /^(0)+$/.test(lastNumber.trim()) && /^[0-9]$/.test(e.key)
+                    || lastNumber.includes('.') && e.key == '.'
+                    || (printing.includes(screen.textContent[screen.textContent.length - 1]) && e.key == '.')
+                    || lastNumber == ' ' && printing.includes(e.key)
+                )
+                    return
+                    
+                else if (printing.includes(screen.textContent[screen.textContent.length-1])
+                     && printing.includes(e.key))
+                {
+                    backspace()
+                    screen.textContent += e.key;
+                }
+                
+                else
+                    screen.textContent += e.key;
+
+            }
 
             else if( e.key == 'Backspace')
                 backspace();
