@@ -3,7 +3,7 @@ go
 
 alter proc PSUBJECT
 (
-	@p varchar(20),
+	@p varchar(20) = null,
 	@c int output
 )
 as 

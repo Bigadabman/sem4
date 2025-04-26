@@ -1,5 +1,4 @@
 
-
 create table Товары (
 НазваниеТовара nvarchar(20) primary key,
 Описание nvarchar(50) not null
