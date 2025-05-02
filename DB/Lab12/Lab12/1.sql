@@ -28,5 +28,5 @@ end catch
 
 set implicit_transactions off
 
-
+go
 select * from #bankAccaunts

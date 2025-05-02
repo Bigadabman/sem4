@@ -7,7 +7,7 @@ begin tran
 	
 	select @@spid, * from Pulpit;
 
-	--waitfor delay '00:00:10'
+	waitfor delay '00:00:10'
 
 
 	select @@spid, * from pulpit;

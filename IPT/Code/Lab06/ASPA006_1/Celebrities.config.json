@@ -1,0 +1,6 @@
+{
+    "Celebrities": {
+        "PhotosFolder": "D:\\bstu\\sem 4\\IPT\\Code\\Lab06\\ASPA006_1\\Photos",
+        "ConnectionString": "Server=DESKTOP-5MOB7JF;Initial Catalog=CelebrityDB;Integrated Security=True;TrustServerCertificate=Yes;"
+    }
+}

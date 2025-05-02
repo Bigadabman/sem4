@@ -44,6 +44,10 @@ begin
 
 	begin catch
 		
+		close csubject
+
+		deallocate csubject
+
 		print 'Код ошибки: ' + cast(error_number() as varchar(6));
 		print 'Уровень: ' + cast(error_severity() as varchar(6));
 		print 'Ошибка: ' + error_message();
@@ -59,3 +63,4 @@ go
 	exec SUBJECT_REPORT 'ИСиТ'
 
 
+	go 
