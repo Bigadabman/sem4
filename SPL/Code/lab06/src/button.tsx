@@ -108,7 +108,7 @@ export function MyButton(props: IProps) {
             if(/^(0)+$/.test(lastNumber.trim()) && /^[0-9]$/.test(props.title)
                     || lastNumber.includes('.') && props.title == '.'
                     || (printing.includes(screen.textContent[screen.textContent.length-1]) && props.title == '.')
-                    || lastNumber == ' ' && printing.includes(props.title)
+                    || lastNumber == ' ' && printing.includes(props.title )
             )
                 return
             else if (printing.includes(screen.textContent[screen.textContent.length-1]) 
