@@ -6,19 +6,10 @@ export interface StateType {
   counter: number;
 }
 
-type IncrementAction = {
-  type: typeof INCREMENT;
-}
+type IncrementAction = {  type: typeof INCREMENT;}
 
-type  DecrementAction = {
-  type: typeof DECREMENT;
-}
+type  DecrementAction = { type: typeof DECREMENT;}
 
-type ResetAction  ={
-  type: typeof RESET;
-}
+type ResetAction  ={  type: typeof RESET;}
 
-export type ActionTypes = 
-  | IncrementAction 
-  | DecrementAction 
-  | ResetAction;
+export type ActionTypes = | IncrementAction | DecrementAction | ResetAction;
