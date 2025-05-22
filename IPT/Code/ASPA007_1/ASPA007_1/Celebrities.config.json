@@ -1,0 +1,7 @@
+{
+    "Celebrities": {
+        "PhotosRequestPath": "/api/Photos",
+        "PhotosFolder": "D:\\bstu\\sem 4\\IPT\\Code\\ASPA007_1\\ASPA007_1\\Photos",
+        "ConnectionString": "Data Source=DESKTOP-5MOB7JF;Initial Catalog=CelebrityDB;Integrated Security=True;TrustServerCertificate=True;"
+    }
+}

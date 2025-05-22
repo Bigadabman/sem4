@@ -1,0 +1,51 @@
+﻿<Window x:Class="Lab04_05.RecipeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Рецепт" 
+        Width="800" 
+        Height="600"
+        FontFamily="Arial"
+        Icon="D:\bstu\sem 4\OOP\Code\Lab04-05\Lab04-05\bin\Debug\Resources\icon.png"
+        Cursor="D:\bstu\sem 4\OOP\Code\Lab04-05\Lab04-05\bin\Debug\Resources\Kitty normal.ani"
+        >
+
+    <Window.Resources>
+
+        <Style TargetType="Label" x:Key="HeaderStyle">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0 20 0 10"/>
+            <Setter Property="Foreground" Value="#333"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="SubHeaderStyle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0 15 0 5"/>
+            <Setter Property="Foreground" Value="#444"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="BodyTextStyle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="Foreground" Value="#666"/>
+        </Style>
+
+        <Style TargetType="Image">
+            <Setter Property="Margin" Value="0 10"/>
+            <Setter Property="MaxHeight" Value="300"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer>
+        <Grid Margin="20">
+            <StackPanel x:Name="Container">
+                
+                
+                
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>

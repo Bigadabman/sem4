@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="AppTitle">Книга рецептов</system:String>
+    <system:String x:Key="SearchRecipes">Поиск рецептов</system:String>
+    <system:String x:Key="MaxCookingTime">Макс. время готовки</system:String>
+    <system:String x:Key="Minutes">минут</system:String>
+    <system:String x:Key="CreateRecipeButton">Создать рецепт</system:String>
+    <system:String x:Key="LanguageButtonText">English</system:String>
+</ResourceDictionary>
