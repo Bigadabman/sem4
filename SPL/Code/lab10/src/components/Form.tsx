@@ -5,8 +5,10 @@ import { addTask, editTask, ITask } from "../redux/tasksSlice";
 import { Task as TaskComponent } from "./task";
 
 export function Form() {
+
   const tasks = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
+  
   const [inputValue, setInputValue] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
 

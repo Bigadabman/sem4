@@ -1,4 +1,3 @@
-import { Button } from "./button";
 import { useDispatch } from "react-redux";
 import { del, edit, toggle } from "../redux/actions";
 import { taskType } from "../redux/types";
@@ -7,11 +6,6 @@ import { taskType } from "../redux/types";
 interface IProps{
     task: taskType
     onEdit: (id: number, content: string) => void;
-}
-
-
-function handleToggle(){
-
 }
 
 
