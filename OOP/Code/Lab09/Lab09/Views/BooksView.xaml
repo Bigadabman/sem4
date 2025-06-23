@@ -1,0 +1,25 @@
+<UserControl x:Class="LibraryApp.Views.BooksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:LibraryApp.ViewModels">
+    <UserControl.DataContext>
+        <vm:BooksViewModel />
+    </UserControl.DataContext>
+    <StackPanel>
+        <TextBox Width="200" Margin="5" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Поиск..." />
+        <Button Content="Поиск" Command="{Binding SearchCommand}" Width="100" Margin="5"/>
+        <DataGrid ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" AutoGenerateColumns="False" Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
+                <DataGridTextColumn Header="Год" Binding="{Binding Year}" Width="80"/>
+                <DataGridTextColumn Header="Автор" Binding="{Binding Author.Name}" Width="150"/>
+                <DataGridTextColumn Header="Жанр" Binding="{Binding Genre.Name}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Добавить" Command="{Binding AddCommand}" Width="100" Margin="5"/>
+            <Button Content="Сохранить" Command="{Binding EditCommand}" Width="100" Margin="5"/>
+            <Button Content="Удалить" Command="{Binding DeleteCommand}" Width="100" Margin="5"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

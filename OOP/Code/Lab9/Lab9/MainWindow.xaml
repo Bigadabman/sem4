@@ -1,0 +1,26 @@
+﻿<Window x:Class="LibraryApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:LibraryApp"
+        xmlns:views="clr-namespace:LibraryApp.Views"
+        Title="Библиотека" Height="600" Width="900">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Книги">
+                <views:BooksView />
+            </TabItem>
+            <TabItem Header="Авторы">
+                <views:AuthorsView />
+            </TabItem>
+            <TabItem Header="Жанры">
+                <views:GenresView />
+            </TabItem>
+            <TabItem Header="Читатели">
+                <views:ReadersView />
+            </TabItem>
+            <TabItem Header="Выдачи">
+                <views:BookLoansView />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

@@ -1,0 +1,12 @@
+<Window x:Class="SimpleWpfOop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Student Manager" Height="250" Width="400">
+    <StackPanel Margin="10">
+        <TextBlock Text="Student name:"/>
+        <TextBox x:Name="NameBox" Margin="0,5"/>
+        <Button Content="Add Student" Click="AddStudent_Click" Width="120"/>
+        <ListBox x:Name="StudentList" Margin="0,10" Height="100"/>
+        <Button Content="Remove Selected" Click="RemoveStudent_Click" Width="120"/>
+    </StackPanel>
+</Window>
