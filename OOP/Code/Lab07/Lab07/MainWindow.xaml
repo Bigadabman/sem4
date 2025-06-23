@@ -1,0 +1,32 @@
+<Window x:Class="WpfCustomControlsDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WpfCustomControlsDemo"
+        Title="Custom Controls Demo" Height="350" Width="500">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:MainWindow.MyCustomCommand"
+                        Executed="MyCustomCommand_Executed"/>
+    </Window.CommandBindings>
+    <StackPanel Margin="20" x:Name="MainStack" PreviewMouseDown="MainStack_PreviewMouseDown">
+        <TextBlock FontWeight="Bold" Text="ValidatedTextBox Demo:" Margin="0,0,0,5"/>
+        <local:ValidatedTextBox x:Name="validatedTextBox"
+                                Width="200"
+                                NumberValue="10"
+                                NumberValueChanged="ValidatedTextBox_NumberValueChanged"
+                                NumberChanged="ValidatedTextBox_NumberChanged"
+                                Margin="0,0,0,20"/>
+        <TextBlock FontWeight="Bold" Text="ColoredButton Demo:" Margin="0,0,0,5"/>
+        <local:ColoredButton x:Name="coloredButton"
+                             Width="200"
+                             Height="40"
+                             ButtonColor="Blue"
+                             ButtonClicked="ColoredButton_ButtonClicked"
+                             ButtonPressed="ColoredButton_ButtonPressed"
+                             Margin="0,0,0,20">
+            Нажми меня!
+        </local:ColoredButton>
+        <Button Command="local:MainWindow.MyCustomCommand" Content="Вызвать команду" Width="200"/>
+        <!-- Добавьте или убедитесь, что этот элемент присутствует и имя совпадает с используемым в коде -->
+        <TextBlock Margin="0,10,0,0" x:Name="InfoText"/>
+    </StackPanel>
+</Window>
