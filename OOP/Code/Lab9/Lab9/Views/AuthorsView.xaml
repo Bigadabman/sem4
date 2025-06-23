@@ -11,7 +11,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-            <TextBox Width="200" Margin="0,0,10,0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Поиск..." />
+            <TextBox Width="200" Margin="0,0,10,0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="Поиск" Command="{Binding SearchCommand}" Margin="0,0,10,0"/>
             <Button Content="Добавить" Command="{Binding AddCommand}" Margin="0,0,10,0"/>
             <Button Content="Сохранить" Command="{Binding EditCommand}" Margin="0,0,10,0" IsEnabled="{Binding SelectedAuthor, Converter={StaticResource NullToBoolConverter}}"/>

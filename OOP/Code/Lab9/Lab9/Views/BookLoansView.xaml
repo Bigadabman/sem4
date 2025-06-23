@@ -11,8 +11,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-            <ComboBox Width="200" Margin="0,0,10,0" ItemsSource="{Binding Books}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedBook}" PlaceholderText="Книга"/>
-            <ComboBox Width="200" Margin="0,0,10,0" ItemsSource="{Binding Readers}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedReader}" PlaceholderText="Читатель"/>
+            <ComboBox Width="200" Margin="0,0,10,0" ItemsSource="{Binding Books}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedBook}" />
+            <ComboBox Width="200" Margin="0,0,10,0" ItemsSource="{Binding Readers}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedReader}" />
             <Button Content="Выдать" Command="{Binding LoanCommand}" Margin="0,0,10,0"/>
             <Button Content="Вернуть" Command="{Binding ReturnCommand}" Margin="0,0,10,0" IsEnabled="{Binding SelectedBookLoan, Converter={StaticResource NullToBoolConverter}}"/>
         </StackPanel>
